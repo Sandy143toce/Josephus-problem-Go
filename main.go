@@ -6,22 +6,6 @@ import (
 	"github.com/Sandy143toce/Josephus-problem-Go/models"
 )
 
-// func JosephusEliminator(n int, k int, people []models.PlayerProfile) int {
-// 	result := make([]int, 0)
-// 	eliminator := 0
-// 	round := 1
-// 	for n > 1 {
-// 		eliminator = (eliminator + k - 1) % n
-// 		result = append(result, people[eliminator].Id)
-// 		fmt.Println("The person Eliminated in round", round, "is:", people[eliminator].Name)
-// 		people = append(people[:eliminator], people[eliminator+1:]...)
-// 		n--
-// 		round++
-// 	}
-// 	result = append(result, people[0].Id)
-// 	return result[len(result)-1]
-// }
-
 func JosephusEliminator(n int, k int, people []models.PlayerProfile) string {
 	if k < 0 {
 		return "Invalid Input"
