@@ -2,33 +2,35 @@ package main
 
 import (
 	"fmt"
+
+	"github.com/Sandy143toce/Josephus-problem-Go/models"
 )
 
-func josephus(n int, k int, people []models.PlayerProfile) int {
+func JosephusEliminator(n int, k int, people []models.PlayerProfile) int {
 	result := make([]int, 0)
-	idx := 0
+	eliminator := 0
 	round := 1
 	for n > 1 {
-		idx = (idx + k - 1) % n
-		result = append(result, people[idx].id)
-		fmt.Println("The person Eliminated in round ", round, " is: ", people[idx].Name)
-		people = append(people[:idx], people[idx+1:]...)
+		eliminator = (eliminator + k - 1) % n
+		result = append(result, people[eliminator].Id)
+		fmt.Println("The person Eliminated in round", round, "is:", people[eliminator].Name)
+		people = append(people[:eliminator], people[eliminator+1:]...)
 		n--
 		round++
 	}
-	result = append(result, people[0].id)
+	result = append(result, people[0].Id)
 	return result[len(result)-1]
 }
 
 func main() {
-	players := []PlayerProfile{
-		{Name: "John", Age: 25, id: 1},
-		{Name: "Jane", Age: 22, id: 2},
-		{Name: "Jim", Age: 30, id: 3},
-		{Name: "Jill", Age: 28, id: 4},
-		{Name: "Jack", Age: 26, id: 5},
+	players := []models.PlayerProfile{
+		{Name: "Sandip", Age: 25, Id: 1},
+		{Name: "Ram", Age: 22, Id: 2},
+		{Name: "Sam", Age: 30, Id: 3},
+		{Name: "Jack", Age: 28, Id: 4},
+		{Name: "Elon", Age: 26, Id: 5},
 	}
-	n, k := 5, 2
-	result := josephus(n, k, players)
-	fmt.Println("The Last person to survive is:", result)
+	n, k := len(players), 2
+	result := JosephusEliminator(n, k, players)
+	fmt.Println("The ID of the person to survive is:", result)
 }
